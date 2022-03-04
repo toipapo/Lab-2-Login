@@ -1,0 +1,23 @@
+body{
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(45deg, rgb(152, 152, 235), rgb(61, 61, 238));
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.mt-30{
+    margin-top:30px;
+}
+
+hr.rounded{
+    border-top: 8px solid #bbb;
+    border-radius: 5px;
+}
