@@ -30,10 +30,12 @@ class OTPForm(FlaskForm):
 
 @app.route('/')
 def index():
+    global otp
+    global hasRequestedOTP
     form = LoginForm()
     return render_template('loginpage.html', form = form)
 
-@app.route('/profilepage')
+@app.route('/profilepage', methods = ['POST'])
 def profilepage():
     global otp
     global hasRequestedOTP
@@ -81,14 +83,15 @@ def otp_generator():
 def otp_request():
     global otp
     global hasRequestedOTP
+    form = OTPForm()
 
     if hasRequestedOTP == False:
         otp = otp_generator()
         hasRequestedOTP = True
 
-        email_request = smtplib.SMTP("smtp.gmail.com", 587)
-        email_request.starttls
-        email_request.login("michaeljoy.rodriguez@g.msuiit.edu.ph", "vuyzzmqldssgkiam")
+        email_request = smtplib.SMTP("smtp.gmail.com", port = 587)
+        email_request.starttls()
+        email_request.login("michaeljoy.rodriguez@g.msuiit.edu.ph", "xxspkphyvawrsbdp")
         email = "michaeljoy.rodriguez@g.msuiit.edu.ph"
         email_request.sendmail('&&&&&&&&&&&',email, str(otp))
 
@@ -98,7 +101,7 @@ def otp_request():
         else:
             return "<p>" + "Incorrect OTP was entered" + "</p>"
     else:
-        return render_template('ottpage.html', context = {"status": otp})
+        return render_template('otppage.html', context = {"status": otp}, form = form)
         
 
 @app.route('/logout', methods = ['GET', 'POST'])
